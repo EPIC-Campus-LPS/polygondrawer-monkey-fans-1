@@ -22,7 +22,7 @@ public class Application extends JFrame{
 
         JMenu mnPolygon = new JMenu("Polygon")
         menuBar.add(mnPolygon);
-
+//monkey
         JMenuItem mntmReset = new JMenuItem("Reset");
         mntmReset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
         mnPolygon.add(mntmReset);
