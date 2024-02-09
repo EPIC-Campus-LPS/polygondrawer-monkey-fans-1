@@ -29,6 +29,7 @@ public class Application extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
 
+        //creates each object individually
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
@@ -52,7 +53,24 @@ public class Application extends JFrame{
         setContentPane(contentPane);
     }
 
+    /**
+     * Gets the menu item for undo
+     *
+     * @return The undo menu item object
+     */
     public JMenuItem getUndoMenuItem() { return menuItem_RemoveLast; }
+
+    /**
+     * Gets the menu item for reset
+     *
+     * @return The reset menu item object
+     */
     public JMenuItem getResetMenuItem() { return menuItem_Reset; }
+
+    /**
+     * Gets the polygon drawer
+     *
+     * @return  The opolygon drawer J Panel
+     */
     public JPanel getPolygonDrawer() { return contentPane; }
 }
