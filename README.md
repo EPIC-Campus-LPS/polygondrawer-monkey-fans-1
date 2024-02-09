@@ -1,5 +1,5 @@
 # Lab 1 : Polygon Drawer
-For this lab, you will create an application to "draw" polygons using the Model-View-Controller design scheme. Your program will open a window using Java's Swing library and allow users to click the screen to add vertexes to their polygon. Your program will also allow users to undo the last vertex they added or clear the screen and start again.
+For this lab, you will create an application to "draw" polygons using the Model.Model-View-Controller design scheme. Your program will open a window using Java's Swing library and allow users to click the screen to add vertexes to their polygon. Your program will also allow users to undo the last vertex they added or clear the screen and start again.
 
 ## Example Video
 
@@ -36,9 +36,9 @@ https://github.com/gormes-EPIC/PolygonApplicationSample/assets/134316348/0cb59db
 
 
 ### Building Basic Functionality
-1. Create a `Model` class to represent the model for this class. Rather than use an external database, you may choose to store your vertices(of type `Polygon`) in a data structure of your choice. It is also important that the order in which vertexes were added to the polygon is maintained.
+1. Create a `Model.Model` class to represent the model for this class. Rather than use an external database, you may choose to store your vertices(of type `Polygon`) in a data structure of your choice. It is also important that the order in which vertexes were added to the polygon is maintained.
 2. Create a `PolygonDrawer` class to extend JPanel
 3. Add getters for `PolygonDrawer`, and both JMenuItems
 4. Update the `Application` constructor to be a parameter of the model
 5. Update the `Application` so WindowBuilder doesn't complain
-6. Update the main to add the `Model` and `Application`
+6. Update the main to add the `Model.Model` and `Application`

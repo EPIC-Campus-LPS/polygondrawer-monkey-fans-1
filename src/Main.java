@@ -1,5 +1,6 @@
-import java.awt.EventQueue;
+import Model.Model;
 import View.Application;
+
 public class Main {
     public static void main(String[] args) {
             Model m = new Model();
