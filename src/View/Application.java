@@ -9,6 +9,9 @@ import java.awt.event.KeyEvent;
 
 import Model.Model;
 
+/**
+ *  View application class for Polygon Drawer communicating with Model
+ */
 public class Application extends JFrame{
     JPanel contentPane;
     JMenu menu_Polygon;
@@ -16,6 +19,11 @@ public class Application extends JFrame{
     JMenuItem menuItem_Reset;
     JMenuItem menuItem_RemoveLast;
 
+    /**
+     *  The main application method for application class
+     *
+     * @param m The model being communicated with
+     */
     public Application(Model m) {
         setTitle("Sample Polygon Drawing Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
