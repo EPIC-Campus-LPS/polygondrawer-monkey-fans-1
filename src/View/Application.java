@@ -7,7 +7,9 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 public class Application extends JFrame{
-    private JPanel contentPane;
+    private PolygonDrawer contentPane;
+
+    JMenu     menu_Polygon;
     private JMenu Polygon;
     private JMenu Edit;
     private JMenuItem reset;
@@ -22,7 +24,7 @@ public class Application extends JFrame{
         setJMenuBar(menuBar);
 
         JMenu mnPolygon = new JMenu("Polygon");
-        menuBar.add(mnPolygon);
+        menuBar.add(menu_Polygon);
 
         JMenuItem mntmReset = new JMenuItem("Reset");
         mntmReset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
@@ -35,7 +37,7 @@ public class Application extends JFrame{
         mntmRemoveLast.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, 0));
         mnEdit.add(mntmRemoveLast);
 
-        contentPane = new JPanel();
+        contentPane = new PolygonDrawer();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
