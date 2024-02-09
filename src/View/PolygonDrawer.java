@@ -1,10 +1,13 @@
-package View;
+package sample.view;
 
 import javax.swing.JPanel;
 
 public class PolygonDrawer extends JPanel {
 
-        public PolygonDrawer() {
+
+
+        public PolygonDrawer(Model m) {
+            this.model = m;
 
         }
 }

@@ -2,14 +2,11 @@ import java.awt.EventQueue;
 import View.Application;
 public class Main {
     public static void main(String[] args) {
+            Model m = new Model();
 
-        EventQueue.invokeLater(() -> {
-            try {
-                Application frame = new Application();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
+            Application frame = new Application(m);
+            frame.setVisible(true);
+                }
             }
-        });
-    }
-}
+
+

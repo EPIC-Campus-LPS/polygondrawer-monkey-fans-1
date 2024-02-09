@@ -1,7 +1,5 @@
 package View;
 
-import View.PolygonDrawer;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -9,13 +7,13 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 public class Application extends JFrame{
-    PolygonDrawer contentPane;
+    private PolygonDrawer contentPane;
 
-    JMenu menu_Polygon;
+    JMenu     menu_Polygon;
     private JMenu Polygon;
-    JMenu menu_Edit;
-    JMenuItem menuItem_Reset;
-    JMenuItem menuItem_RemoveLast;
+    private JMenu Edit;
+    private JMenuItem reset;
+    private JMenuItem removeLast;
 
     public Application() {
         setTitle("Sample Polygon Drawing Application");
@@ -25,27 +23,29 @@ public class Application extends JFrame{
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
-        menu_Polygon = new JMenu("Polygon");
+        JMenu mnPolygon = new JMenu("Polygon");
         menuBar.add(menu_Polygon);
 
-        menuItem_Reset = new JMenuItem("Reset");
-        menuItem_Reset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
-        menu_Polygon.add(menuItem_Reset);
+        JMenuItem mntmReset = new JMenuItem("Reset");
+        mntmReset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+        mnPolygon.add(mntmReset);
 
-        menu_Edit = new JMenu("Edit");
-        menuBar.add(menu_Edit);
+        JMenu mnEdit = new JMenu("Edit");
+        menuBar.add(mnEdit);
 
-        JMenuItem menuItem_RemoveLast = new JMenuItem("Remove Last");
-        menuItem_RemoveLast.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, 0));
-        menu_Edit.add(menuItem_RemoveLast);
+        JMenuItem mntmRemoveLast = new JMenuItem("Remove Last");
+        mntmRemoveLast.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, 0));
+        mnEdit.add(mntmRemoveLast);
 
-        contentPane = new PolygonDrawer();
+        contentPane = new PolygonDrawer(model);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
+
     }
 
-    public JMenuItem getUndoMenuItem() { return menuItem_RemoveLast; }
-    public JMenuItem getResetMenuItem() { return menuItem_Reset; }
-    public PolygonDrawer getPolygonDrawer() { return contentPane; }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
