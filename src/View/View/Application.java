@@ -71,7 +71,7 @@ public class Application extends JFrame{
         });
     }
     Application(){
-        this (new Model());
+        this (new Model());//uiyt
     }
     /**
      * Gets the menu item for undo
