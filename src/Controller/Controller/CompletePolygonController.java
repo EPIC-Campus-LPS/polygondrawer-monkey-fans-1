@@ -1,3 +1,5 @@
+package Controller;
+
 import Controller.UpdatedMenu;
 import Model.Model;
 import View.Application;

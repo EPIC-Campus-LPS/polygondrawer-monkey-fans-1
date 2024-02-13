@@ -1,7 +1,10 @@
 import Model.Model;
 import View.Application;
-
+import Controller.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 public class Main {
 
     /**
