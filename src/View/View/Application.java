@@ -60,9 +60,19 @@ public class Application extends JFrame{
             }
         });
 
-
         contentPane = new PolygonDrawer(model);
 
+        contentPane.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+            if (SwingUtilities.isRightMouseButton(e)) {
+                new CompletePolygonController(Application.this, m).complete();
+            } else {
+                new AddPointController(Application.this, m).addPoint(e.getPoint());
+            }
+        }
+        });
 
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
