@@ -3,18 +3,28 @@ import View.Application;
 
 import java.awt.*;
 public class Main {
+
+    /**
+     * Launch the application.
+     */
     public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                Model model = new Model();
-                Application frame = new Application(model);
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
+        Model m = new Model();
+
+        final Application frame = new Application(m);
+        UpdatedMenu.updateMenu(frame, m);
+
+        // Disposing the window will complete the application
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                if (new QuitController().confirm(frame)) {
+                    frame.dispose();
+                }
             }
         });
-    }
-}
 
+        frame.setVisible(true);
+    }
+
+}
 
 
