@@ -25,7 +25,7 @@ public class PolygonDrawer extends JPanel {
 
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
-
+            g.setColor(Color.yellow);
             Iterator<Polygon> it = model.iterator();
             while (it.hasNext()) {
                 Polygon poly = it.next();
