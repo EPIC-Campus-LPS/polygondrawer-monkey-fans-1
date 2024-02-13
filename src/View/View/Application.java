@@ -54,6 +54,14 @@ public class Application extends JFrame{
         JMenuItem menuItem_RemoveLast = new JMenuItem("Remove Last");
         menuItem_RemoveLast.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, 0));
         menu_Edit.add(menuItem_RemoveLast);
+        menuItem_RemoveLast.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new UndoController(Application.this, m).removeLastPoint();
+            }
+        });
+                                              }
 
         contentPane = new PolygonDrawer(m);
 
