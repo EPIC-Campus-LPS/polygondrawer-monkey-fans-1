@@ -1,0 +1,97 @@
+Index: src/View/Application.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package View;\r\n\r\n\r\nimport javax.swing.*;\r\nimport javax.swing.border.EmptyBorder;\r\nimport java.awt.*;\r\nimport java.awt.event.InputEvent;\r\nimport java.awt.event.KeyEvent;\r\nimport java.awt.event.MouseAdapter;\r\nimport java.awt.event.MouseEvent;\r\n\r\nimport Model.Model;\r\n\r\n/**\r\n *  View application class for Polygon Drawer communicating with Model\r\n */\r\npublic class Application extends JFrame{\r\n    JPanel contentPane;\r\n    JMenu menu_Polygon;\r\n    JMenu menu_Edit;\r\n    JMenuItem menuItem_Reset;\r\n    JMenuItem menuItem_RemoveLast;\r\n\r\n    /**\r\n     *  The main application method for application class\r\n     *\r\n     * @param m The model being communicated with\r\n     */\r\n    public Application(Model m) {\r\n        setTitle(\"Sample Polygon Drawing Application\");\r\n        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\r\n        setBounds(100, 100, 450, 300);\r\n\r\n        //creates each object individually\r\n        JMenuBar menuBar = new JMenuBar();\r\n        setJMenuBar(menuBar);\r\n\r\n        menu_Polygon = new JMenu(\"Polygon\");\r\n        menuBar.add(menu_Polygon);\r\n\r\n        menuItem_Reset = new JMenuItem(\"Reset\");\r\n        menuItem_Reset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));\r\n        menu_Polygon.add(menuItem_Reset);\r\n\r\n        menu_Edit = new JMenu(\"Edit\");\r\n        menuBar.add(menu_Edit);\r\n\r\n        JMenuItem menuItem_RemoveLast = new JMenuItem(\"Remove Last\");\r\n        menuItem_RemoveLast.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, 0));\r\n        menu_Edit.add(menuItem_RemoveLast);\r\n\r\n        contentPane = new PolygonDrawer(m);\r\n        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));\r\n        contentPane.setLayout(new BorderLayout(0, 0));\r\n        setContentPane(contentPane);\r\n\r\n        contentPane.addMouseListener(new MouseAdapter() {\r\n\r\n            public void mouseClicked(MouseEvent e) {\r\n                new AddPointController(Application.this,model).addPoints(e.getPoint());\r\n            }\r\n        });\r\n    }\r\n\r\n    /**\r\n     * Gets the menu item for undo\r\n     *\r\n     * @return The undo menu item object\r\n     */\r\n    public JMenuItem getUndoMenuItem() { return menuItem_RemoveLast; }\r\n\r\n    /**\r\n     * Gets the menu item for reset\r\n     *\r\n     * @return The reset menu item object\r\n     */\r\n    public JMenuItem getResetMenuItem() { return menuItem_Reset; }\r\n\r\n    /**\r\n     * Gets the polygon drawer\r\n     *\r\n     * @return  The opolygon drawer J Panel\r\n     */\r\n    public JPanel getPolygonDrawer() { return contentPane; }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/View/Application.java b/src/View/Application.java
+--- a/src/View/Application.java	(revision 4a53101a36a98e2fe1c84f94a3e4b7feea8eed7f)
++++ b/src/View/Application.java	(date 1707841638017)
+@@ -1,5 +1,5 @@
+ package View;
+-
++import Controller.AddPointController;
+ 
+ import javax.swing.*;
+ import javax.swing.border.EmptyBorder;
+Index: src/Controller/AddPointController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import View.Application;\r\nimport Model.Model;\r\nimport java.awt.*\r\npublic class AddPointController {\r\n\r\n    private Model model;\r\n\r\n    private Application app;\r\n\r\n    public AddPointController(Application app, Model m) {\r\n        this.app = app;\r\n        this.model = m;\r\n    }\r\n\r\n    public void addPoint(Point p){}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Controller/AddPointController.java b/src/Controller/AddPointController.java
+--- a/src/Controller/AddPointController.java	(revision 4a53101a36a98e2fe1c84f94a3e4b7feea8eed7f)
++++ b/src/Controller/AddPointController.java	(date 1707841994608)
+@@ -1,6 +1,7 @@
+ import View.Application;
+ import Model.Model;
+-import java.awt.*
++import java.awt.* ;
++import java.util.Optional;
+ public class AddPointController {
+ 
+     private Model model;
+@@ -12,6 +13,19 @@
+         this.model = m;
+     }
+ 
+-    public void addPoint(Point p){}
++    public void addPoint(Point p){
++        Optional<Polygon> selected = model.getSelected();
++        if(!selected.isPresent()) {
++            Polygon poly = new Polygon();
++            poly.addPoint(p.x, p.y);
++
++            model.addPolygon(poly);
++            model.makeCurrent(poly);
++        } else {
++            selected.get().addPoint(p.x, p.y);
++        }
++
++        app.repaint();
++    }
+ 
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"f778e718-9c75-4e06-8fae-8f232972fb42\" name=\"Changes\" comment=\"Monkey\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 7\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2c04za0OtdNUa1gGmgY6VcAUyJ6\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;last_directory_selection&quot;: &quot;C:/Users/benjamina107_lpsk12/IdeaProjects/polygondrawer-monkey-fans-1/src/View&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\r\n      <module name=\"PolygonApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"f778e718-9c75-4e06-8fae-8f232972fb42\" name=\"Changes\" comment=\"\" />\r\n      <created>1707235430520</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1707235430520</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Monkey\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1707331743394</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1707331743394</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Monkey\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1707494326210</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1707494326210</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Monkey\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1707499762138</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1707499762138</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Monkey\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1707500463932</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1707500463932</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Monkey\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1707500499280</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1707500499280</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Monkey\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1707500867936</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1707500867936</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Monkey\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDE48\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\uD83D\uDEAB\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1707841111674</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1707841111674</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"8\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Monkey\" />\r\n    <MESSAGE value=\"Monkey\" />\r\n    <MESSAGE value=\"Monkey\" />\r\n    <MESSAGE value=\"Monkey\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Monkey\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 4a53101a36a98e2fe1c84f94a3e4b7feea8eed7f)
++++ b/.idea/workspace.xml	(date 1707841961146)
+@@ -4,7 +4,11 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="f778e718-9c75-4e06-8fae-8f232972fb42" name="Changes" comment="Monkey🙈🙈🙈🙈🙈🙈🚫🚫🚫🚫🚫" />
++    <list default="true" id="f778e718-9c75-4e06-8fae-8f232972fb42" name="Changes" comment="Monkey🙈🙈🙈🙈🙈🙈🚫🚫🚫🚫🚫">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Controller/AddPointController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AddPointController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/View/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Application.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -131,7 +135,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1707841111674</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL-00008" summary="Monkey🙈🙈🙈🙈🙈🙈🚫🚫🚫🚫🚫">
++      <option name="closed" value="true" />
++      <created>1707841215990</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1707841215990</updated>
++    </task>
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
