@@ -20,7 +20,7 @@ public class Application extends JFrame{
     JMenu menu_Edit;
     JMenuItem menuItem_Reset;
     JMenuItem menuItem_RemoveLast;
-
+/** makes the app window and allows things to be edited*/
     /**
      *  The main application method for application class
      *
@@ -50,6 +50,8 @@ public class Application extends JFrame{
         menu_Edit.add(menuItem_RemoveLast);
 
         contentPane = new PolygonDrawer(m);
+
+
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
@@ -79,7 +81,7 @@ public class Application extends JFrame{
     /**
      * Gets the polygon drawer
      *
-     * @return  The opolygon drawer J Panel
+     * @return  The polygon drawer J Panel
      */
     public JPanel getPolygonDrawer() { return contentPane; }
 }
