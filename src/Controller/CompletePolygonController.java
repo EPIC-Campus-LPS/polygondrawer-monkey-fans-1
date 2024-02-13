@@ -1,3 +1,6 @@
+import Model.Model;
+import View.Application;
+
 public class CompletePolygonController {
 
     private Model model;
@@ -14,7 +17,7 @@ public class CompletePolygonController {
     public void complete(){
         model.unselectPolygon();
 
-        UpdateMenu.updateMenu(app.model);
+        UpdatedMenu.updateMenu(app, model);
         app.repaint();
     }
 }
