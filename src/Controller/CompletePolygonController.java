@@ -1,3 +1,4 @@
+import Controller.UpdatedMenu;
 import Model.Model;
 import View.Application;
 
@@ -7,13 +8,19 @@ public class CompletePolygonController {
 
     private Application app;
 
-
+    /**
+     * Constructor for completepolygoncontroller
+     * @param app Main application
+     * @param m Main model
+     */
     public CompletePolygonController(Application app, Model m){
         this.app = app;
         this.model = m;
     }
 
-
+    /**
+     * Makes a new complete polygon
+     */
     public void complete(){
         model.unselectPolygon();
 

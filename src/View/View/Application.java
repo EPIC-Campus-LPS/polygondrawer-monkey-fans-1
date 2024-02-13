@@ -5,11 +5,9 @@ import Controller.AddPointController;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
+import Controller.UndoController;
 import Model.Model;
 
 /**
@@ -61,9 +59,9 @@ public class Application extends JFrame{
                 new UndoController(Application.this, m).removeLastPoint();
             }
         });
-                                              }
 
-        contentPane = new PolygonDrawer(m);
+
+        contentPane = new PolygonDrawer(model);
 
 
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,7 +77,7 @@ public class Application extends JFrame{
         });
     }
     Application(){
-        this (new Model());//uiyt
+        this (new Model());
     }
     /**
      * Gets the menu item for undo

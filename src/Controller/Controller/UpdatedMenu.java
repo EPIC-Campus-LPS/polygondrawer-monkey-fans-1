@@ -1,8 +1,14 @@
+package Controller;
+
 import View.Application;
 import Model.Model;
 public class UpdatedMenu {
 
-
+    /**
+     * Updates the menu items in the frame.
+     * @param app The main application
+     * @param m The main model
+     */
     public static void updateMenu(Application app, Model m){
         if(m.size() == 0){
             app.getMiReset().setEnabled(false);

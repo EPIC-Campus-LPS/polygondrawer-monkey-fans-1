@@ -9,11 +9,21 @@ public class AddPointController {
 
     private Application app;
 
+    /**
+     * Constructor for addpointcontroller
+     * @param app Main application
+     * @param m Main model
+     */
     public AddPointController(Application app, Model m) {
         this.app = app;
         this.model = m;
     }
 
+    /**
+     * Adds point to the polygon
+     *
+     * @param p The point being added
+     */
     public void addPoint(Point p){
         Optional<Polygon> selected = model.getSelected();
         if(!selected.isPresent()) {
