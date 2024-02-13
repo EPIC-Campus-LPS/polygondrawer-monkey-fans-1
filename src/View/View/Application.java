@@ -1,12 +1,13 @@
 package View;
 
 import Controller.AddPointController;
-
+import Controller.CompletePolygonController;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
+import Controller.ResetController;
 import Controller.UndoController;
 import Model.Model;
 
@@ -32,7 +33,7 @@ public class Application extends JFrame{
     public Application(Model m) {
         model = m;
         setTitle("Sample Polygon Drawing Application");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setBounds(100, 100, 450, 300);
 
         //creates each object individually
@@ -45,12 +46,18 @@ public class Application extends JFrame{
         menuItem_Reset = new JMenuItem("Reset");
         menuItem_Reset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
         menu_Polygon.add(menuItem_Reset);
+        menuItem_Reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ResetController(Application.this, model).reset();
+            }
+        });
 
         menu_Edit = new JMenu("Edit");
         menuBar.add(menu_Edit);
 
         JMenuItem menuItem_RemoveLast = new JMenuItem("Remove Last");
-        menuItem_RemoveLast.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, 0));
+        menuItem_RemoveLast.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
         menu_Edit.add(menuItem_RemoveLast);
         menuItem_RemoveLast.addActionListener(new ActionListener() {
 
