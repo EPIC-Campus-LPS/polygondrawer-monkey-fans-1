@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import Model.Model;
 
@@ -51,6 +53,13 @@ public class Application extends JFrame{
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
+
+        contentPane.addMouseListener(new MouseAdapter() {
+
+            public void mouseClicked(MouseEvent e) {
+                new AddPointController(Application.this,model).addPoints(e.getPoint());
+            }
+        });
     }
 
     /**

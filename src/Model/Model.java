@@ -12,7 +12,7 @@ public class Model {
     public Iterator<Polygon> iterator() { return list.iterator(); }
 
     /**
-     * Returns the amount of pllygon (vertices)
+     * Returns the amount of polygon (vertices)
      * @return The list's size
      */
     public int size() {return list.size(); }
