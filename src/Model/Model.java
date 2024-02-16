@@ -3,6 +3,9 @@ package Model;
 import java.awt.Polygon;
 import java.util.*;
 
+/**
+ * Model holding
+ */
 public class Model {
 
     ArrayList<Polygon> list = new ArrayList<>();

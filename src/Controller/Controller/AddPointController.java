@@ -3,6 +3,10 @@ import View.Application;
 import Model.Model;
 import java.awt.* ;
 import java.util.Optional;
+
+/**
+ * controller for adding new vertex
+ */
 public class AddPointController {
 
     private Model model;

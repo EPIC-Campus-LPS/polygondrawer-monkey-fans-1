@@ -4,6 +4,9 @@ import Controller.UpdatedMenu;
 import Model.Model;
 import View.Application;
 
+/**
+ * Controller for making new polygons
+ */
 public class CompletePolygonController {
 
     private Model model;

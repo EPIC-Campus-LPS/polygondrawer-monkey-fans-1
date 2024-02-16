@@ -8,15 +8,26 @@ import java.awt.*;
 import java.util.Iterator;
 import java.util.Optional;
 
+/**
+ * Controller for removing recent vertex
+ */
 public class UndoController {
     final Model model;
     final Application app;
 
+    /**
+     * Initializes the undo controller
+     * @param app1 The application being drawn on
+     * @param model The model holding the polygon
+     */
     public UndoController(Application app1, Model model) {
         this.model = model;
         this.app = app1;
     }
 
+    /**
+     * Removes the last point placed
+     */
     public void removeLastPoint() {
 
         Optional<Polygon> selected = model.getSelected();

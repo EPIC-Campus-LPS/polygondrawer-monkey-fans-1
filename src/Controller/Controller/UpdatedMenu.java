@@ -2,6 +2,10 @@ package Controller;
 
 import View.Application;
 import Model.Model;
+
+/**
+ * Controller for updating the menu items of reset and delete.
+ */
 public class UpdatedMenu {
 
     /**

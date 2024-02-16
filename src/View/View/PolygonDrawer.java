@@ -22,7 +22,11 @@ public class PolygonDrawer extends JPanel {
 
         }
 
-
+    /**
+     * Adds a new vertex and connects it to any existing previous vertices in the current shape.
+     *
+     * @param g The graphics being used to draw polygons on
+     */
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.setColor(Color.yellow);
